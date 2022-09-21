@@ -4,15 +4,15 @@ import discord
 from dotenv import load_dotenv
 
 # below imports for audio function not yet finished
-import ffmpeg
-import nacl
-from discord import guild, voice_client, FFmpegAudio
-from discord.ext import commands, tasks
+# import ffmpeg
+# import nacl
+# from discord import guild, voice_client, FFmpegAudio
+# from discord.ext import commands, tasks
 # from discord.ext.commands import bot
-from discord import FFmpegAudio, FFmpegPCMAudio, PCMVolumeTransformer
+# from discord import FFmpegAudio, FFmpegPCMAudio, PCMVolumeTransformer
 # from discord.types import voice
-from discord import FFmpegPCMAudio
-from discord.utils import get
+# from discord import FFmpegPCMAudio
+# from discord.utils import get
 
 load_dotenv()
 
@@ -42,6 +42,7 @@ async def on_message(message):
         ': (': 'dont b sad',
         "hope your feelings aren't hurt": 'do I LOOK caSe SenSITIVE to U?! buy my album'
     }
+
     # wont respond to its own messages
     if message.author == client.user:
         return
