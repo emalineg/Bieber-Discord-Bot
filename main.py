@@ -1,14 +1,16 @@
 import asyncio
 import os
+import discord
+from dotenv import load_dotenv
+
+# below imports for audio function not yet finished
 import ffmpeg
 import nacl
-import discord
 from discord import guild, voice_client, FFmpegAudio
 from discord.ext import commands, tasks
 # from discord.ext.commands import bot
 from discord import FFmpegAudio, FFmpegPCMAudio, PCMVolumeTransformer
 # from discord.types import voice
-from dotenv import load_dotenv
 from discord import FFmpegPCMAudio
 from discord.utils import get
 
@@ -24,11 +26,13 @@ client = discord.Client(intents=intents)
 FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
 
 
+# bot online
 @client.event
 async def on_ready():
     print('hey its me')
 
 
+# dictionary with client messages bieberBot will respond to (and what it will say)
 @client.event
 async def on_message(message):
     cmds = {
@@ -38,14 +42,20 @@ async def on_message(message):
         ': (': 'dont b sad',
         "hope your feelings aren't hurt": 'do I LOOK caSe SenSITIVE to U?! buy my album'
     }
-
+    # wont respond to its own messages
     if message.author == client.user:
         return
 
+    # how it'll actually happen
     for cmd, resp in cmds.items():
+        # lowercases client message, so it doesn't have to be case-sensitive
+        # then if it matches item in dictionary ...
         if message.content.lower().startswith(cmd):
+            # adds 'is typing'
             async with message.channel.typing():
+                # for 3 seconds
                 await asyncio.sleep(3)
+                # sends response
                 await message.channel.send(resp)
 
 
@@ -55,15 +65,16 @@ async def on_message(message):
 @client.event
 # notices when someone joins vc
 async def on_voice_state_update(member, before, after):
-    #selects channel someone joined
+    # selects channel someone joined
     if after.channel:
         # joins & play song (needs ffmpeg)
         await member.voice.channel.connect().create_ffmpeg_player('loveme.mp3', after=lambda: print('done'))
-        #waits 3 seconds
+        # waits 3 seconds
 
-        #leaves
+        # leaves
 
-        #some sort of assurance this has to be completed before it will respond
-        #to another call
+        # some sort of assurance this has to be completed before it will respond
+        # to another call
+
 
 client.run(dsecret)
