@@ -47,34 +47,32 @@ async def on_message(message):
         return
 
     # how it'll actually happen
+    # lowercases client message, so it doesn't have to be case-sensitive
+    # then if it matches item in dictionary ...
+    # adds 'is typing'
+    # for 3 seconds
+    # sends response
     for cmd, resp in cmds.items():
-        # lowercases client message, so it doesn't have to be case-sensitive
-        # then if it matches item in dictionary ...
         if message.content.lower().startswith(cmd):
-            # adds 'is typing'
             async with message.channel.typing():
-                # for 3 seconds
                 await asyncio.sleep(3)
-                # sends response
                 await message.channel.send(resp)
 
 
 # BELOW DOESN'T WORK YET --
 # WON'T THROW ERROR UNLESS IT'S ACTIVE WHILE JOINING A VC CHANNEL
 
-@client.event
+# @client.event
 # notices when someone joins vc
-async def on_voice_state_update(member, before, after):
-    # selects channel someone joined
-    if after.channel:
-        # joins & play song (needs ffmpeg)
-        await member.voice.channel.connect().create_ffmpeg_player('loveme.mp3', after=lambda: print('done'))
-        # waits 3 seconds
-
-        # leaves
-
-        # some sort of assurance this has to be completed before it will respond
-        # to another call
+# async def on_voice_state_update(member, before, after):
+# selects channel someone joined
+# if after.channel:
+# joins & play song (needs ffmpeg)
+# await member.voice.channel.connect().create_ffmpeg_player('loveme.mp3', after=lambda: print('done'))
+# waits 3 seconds
+# leaves
+# some sort of assurance this has to be completed before it will respond
+# to another call
 
 
 client.run(dsecret)
