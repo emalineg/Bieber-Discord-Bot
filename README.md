@@ -1,3 +1,7 @@
 # bieberBot
-very limited chatbot (will be adding enter vc upon client enter + better chat capabilities)
+very limited chatbot 
+
+## Tech Stack
+discord.py
+python
 
